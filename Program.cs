@@ -65,7 +65,26 @@ namespace DataStructuresWithArrays
 
         static void findMaxSubArray()
         {
+            int i;
+            int[] arr = { -4, 2, -1, 4, 0, -2, 1};
 
+            int maxBeforeThis = arr[0];
+            int maxWithThis = maxBeforeThis;
+
+            for (i = 1; i < arr.Length; i++)
+            {
+                maxWithThis = maxWithThis + arr[i];
+                if(maxWithThis < arr[i])
+                {
+                    maxWithThis = arr[i];
+                }
+                if(maxWithThis < maxBeforeThis)
+                {
+                    maxWithThis = maxBeforeThis;
+                }
+            }
+
+            Console.WriteLine("The maximum subarray sum is " + maxWithThis);
         }
         static int findEquilibriumIndex()
         {
@@ -176,7 +195,10 @@ namespace DataStructuresWithArrays
             }
 
             for (i=0; i < arr.Length; i++)
-            Console.Write(" , "+arr[i]);
+            {
+                Console.Write(" , "+arr[i]);
+            }
+            
             
         }
 
@@ -242,28 +264,58 @@ namespace DataStructuresWithArrays
             int numRows = arr.GetLength(0);
             int numCols = arr.GetLength(1);
 
-            while (i < numRows)
-            {
-                for(j=0; j < numCols; j++)
-                {
-                    if (j == numCols - 1)
-                    {
+            //while (i < numRows)
+            //{
+            //    for(j=0; j < numCols; j++)
+            //    {
+            //        if (j == numCols - 1)
+            //        {
                         
-                    }
-                    else
-                    {
-                        Console.Write(arr[i, j]);
-                    }
-                }
+            //        }
+            //        else
+            //        {
+            //            Console.Write(arr[i, j]);
+            //        }
+            //    }
                 
-            }
+            //}
         
 
         }
 
 
         static void findNonNegSubArraySum()
-        { 
+        {
+            //int i;
+            int l = 0;
+            int r = 0;
+            int givenSum = 24; //Given Sum
+            
+            int[] arr = { 15, 17, 4, 3, 5, 24 };
+            int currSum = arr[0];
+            int n = arr.Length;
+
+            while ((l < n) && (r < n))
+            {
+                
+                if (currSum == givenSum)
+                {
+                    break;
+                }
+                else if(currSum < givenSum)
+                {
+                    r++;
+                    currSum = currSum + arr[r];
+                }
+                else if(currSum > givenSum)
+                {
+                    currSum = currSum - arr[l];
+                    l++;
+                }
+            }
+            
+            Console.WriteLine($"The given sum was found between the indices {l} and {r}");
+            
         }
 
         static void findNegativeSubArraySum()
