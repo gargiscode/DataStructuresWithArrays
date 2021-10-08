@@ -86,6 +86,8 @@ namespace DataStructuresWithArrays
 
             Console.WriteLine("The maximum subarray sum is " + maxWithThis);
         }
+
+
         static int findEquilibriumIndex()
         {
             int i;
@@ -255,33 +257,63 @@ namespace DataStructuresWithArrays
 
         static void print2DArrayInSpiral()
         {
-            int [,] arr = new int[,] { {1, 2, 3, 4, 5, 6},
-                         {7, 8 , 9 , 10, 11, 12 },
-                         {13, 14, 15, 16, 17, 18 } };
+            int[,] arr = new int[,] { {1, 2, 3, 4, 5, 6},
+                                       {7, 8 , 9 , 10, 11, 12 },
+                                       {13, 14, 15, 16, 17, 18 } };
 
-            int i=0;
-            int j=0;
-            int numRows = arr.GetLength(0);
-            int numCols = arr.GetLength(1);
+            int i,j,k,l;
+            int rowCounter = arr.GetLength(0);
+            int colCounter = arr.GetLength(1);
+            int leftPtr = 0;
+            int rightPtr = colCounter -1;
+            int topPtr = 0;
+            int bottomPtr = rowCounter-1;
 
-            //while (i < numRows)
-            //{
-            //    for(j=0; j < numCols; j++)
-            //    {
-            //        if (j == numCols - 1)
-            //        {
-                        
-            //        }
-            //        else
-            //        {
-            //            Console.Write(arr[i, j]);
-            //        }
-            //    }
-                
-            //}
-        
+            Console.WriteLine("Print 2D array: \n");
 
+
+            while (true)
+            {
+                if (leftPtr <= rightPtr)
+                {
+                    for (j = leftPtr; j <= rightPtr; j++)
+                    {
+                        Console.Write("   " + arr[topPtr, j]);
+                    }
+                    topPtr++;
+                }
+                else break;
+                if (topPtr <= bottomPtr)
+                {
+                    for (k = topPtr; k <= bottomPtr; k++)
+                    {
+                        Console.Write("  " + arr[k, rightPtr]);
+                    }
+
+                    rightPtr--;
+                }
+                else break;
+                if (rightPtr >= leftPtr)
+                {
+                    for (j = rightPtr; j >= leftPtr; j--)
+                    {
+                        Console.Write("  " + arr[bottomPtr, j]);
+                    }
+                    bottomPtr--;
+                }
+                else break;
+                if (bottomPtr >= topPtr)
+                {
+                    for (k = bottomPtr; k >= topPtr; k--)
+                    {
+                        Console.Write("  " + arr[k, leftPtr]);
+                    }
+                    leftPtr++;
+                }
+                else break;
+            }
         }
+
 
 
         static void findNonNegSubArraySum()
